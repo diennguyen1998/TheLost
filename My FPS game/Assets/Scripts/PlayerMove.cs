@@ -27,6 +27,8 @@ public class PlayerMove : MonoBehaviour
 
     private Animator animator;
 
+    public GameManager gameManager;
+
     private void Start()
     {
         charController = GetComponent<CharacterController>();
@@ -170,4 +172,11 @@ public class PlayerMove : MonoBehaviour
         return isJumping;
     }
 
+    void OnCollisionEnter(Collision collisionInfo)
+    {
+        if(collisionInfo.collider.name == "LifeEater")
+        {
+            gameManager.EndGame();
+        }
+    }
 }
