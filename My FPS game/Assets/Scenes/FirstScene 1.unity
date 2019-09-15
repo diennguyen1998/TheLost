@@ -13028,19 +13028,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 374273651}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &1977180953
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1977180950}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 0, z: 0.5}
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &1977180954
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13070,6 +13057,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2079236773}
+  gameManager: {fileID: 1862166688}
 --- !u!195 &1977180956
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -13633,21 +13621,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   jumpMultiplier: 7
   jumpKey: 32
-  gameManager: {fileID: 1862166688}
---- !u!136 &2079236778
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2079236773}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.8
-  m_Height: 3.6
-  m_Direction: 1
-  m_Center: {x: 0, y: 2, z: 0}
 --- !u!1001 &2110119248
 PrefabInstance:
   m_ObjectHideFlags: 0

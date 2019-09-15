@@ -8,8 +8,9 @@ public class EnemyController : MonoBehaviour
     private NavMeshAgent agent;
     public GameObject target;
     private const float chasingDelay = 2.5f;
-    private float lookRadius = 10f;
+    private float lookRadius = 15f;
     private Animator anim;
+    public GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +36,7 @@ public class EnemyController : MonoBehaviour
             if (distance <= agent.stoppingDistance)
             {
                 anim.SetBool("isAttacking", true);
+                gameManager.EndGame();
             }
             else
             {

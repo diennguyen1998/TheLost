@@ -22,8 +22,13 @@ public class GameManager : MonoBehaviour
     {
         playerMove.enabled = false;
         enemyController.enabled = false;
+        Invoke("DeadScene", restartDelay);
+        Invoke("Restart", restartDelay + 1f);
+    }
+
+    void DeadScene()
+    {
         deadUI.SetActive(true);
-        Invoke("Restart", restartDelay);
     }
 
     void Restart()

@@ -18,16 +18,14 @@ public class PlayerMove : MonoBehaviour
 
     private CharacterController charController;
 
-    [SerializeField] private AnimationCurve jumpFallOff;
-    [SerializeField] private float jumpMultiplier;
-    [SerializeField] private KeyCode jumpKey;
+    //[SerializeField] private AnimationCurve jumpFallOff;
+    //[SerializeField] private float jumpMultiplier;
+    //[SerializeField] private KeyCode jumpKey;
 
 
     private bool isJumping;
 
     private Animator animator;
-
-    public GameManager gameManager;
 
     private void Start()
     {
@@ -99,7 +97,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         SetMovementSpeed();
-        JumpInput();
+        //JumpInput();
     }
 
     private void SetMovementSpeed()
@@ -136,7 +134,7 @@ public class PlayerMove : MonoBehaviour
         return false;
     }
 
-    private void JumpInput()
+    /*private void JumpInput()
     {
         if (Input.GetKeyDown(jumpKey) && !isJumping)
         {
@@ -160,7 +158,7 @@ public class PlayerMove : MonoBehaviour
 
         charController.slopeLimit = 45.0f;
         isJumping = false;
-    }
+    }*/
 
     public float GetMovementSpeed()
     {
@@ -172,11 +170,4 @@ public class PlayerMove : MonoBehaviour
         return isJumping;
     }
 
-    void OnCollisionEnter(Collision collisionInfo)
-    {
-        if(collisionInfo.collider.name == "LifeEater")
-        {
-            gameManager.EndGame();
-        }
-    }
 }
