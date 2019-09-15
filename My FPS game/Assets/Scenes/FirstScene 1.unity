@@ -12443,6 +12443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   restartDelay: 1
   deadUI: {fileID: 1218848529}
+  enemy: {fileID: 1977180950}
 --- !u!4 &1862166689
 Transform:
   m_ObjectHideFlags: 0
@@ -13595,32 +13596,6 @@ MonoBehaviour:
   runKey: 304
   slopeForce: 6
   slopeForceRayLength: 1.5
-  jumpFallOff:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.0030593872
-      value: 1.0030823
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.6880493
-      value: 0.00617218
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jumpMultiplier: 7
-  jumpKey: 32
 --- !u!1001 &2110119248
 PrefabInstance:
   m_ObjectHideFlags: 0
