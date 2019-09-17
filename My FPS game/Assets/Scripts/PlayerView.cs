@@ -67,7 +67,8 @@ public class PlayerView : MonoBehaviour
             RaycastHit whatIHit;
             if(Physics.Raycast(transform.position, transform.forward, out whatIHit, Mathf.Infinity))
             {
-                Debug.Log(whatIHit.collider.name);
+                /*string name = whatIHit.collider.name;
+                GameObject.Find(name).transform.position = transform.position;*/
             }
         }
     }

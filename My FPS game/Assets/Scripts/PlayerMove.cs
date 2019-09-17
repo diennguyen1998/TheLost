@@ -21,7 +21,8 @@ public class PlayerMove : MonoBehaviour
     //[SerializeField] private AnimationCurve jumpFallOff;
     //[SerializeField] private float jumpMultiplier;
     //[SerializeField] private KeyCode jumpKey;
-
+    StaminaBar staminaBar;
+    private float drainAmount = 0.4f;
 
     private bool isJumping;
 
@@ -31,6 +32,7 @@ public class PlayerMove : MonoBehaviour
     {
         charController = GetComponent<CharacterController>();
         animator = gameObject.GetComponent<Animator>();
+        staminaBar = GetComponent<StaminaBar>();
     }
 
     private void Update()
@@ -102,9 +104,11 @@ public class PlayerMove : MonoBehaviour
 
     private void SetMovementSpeed()
     {
-        if (Input.GetKey(runKey) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
+        if (Input.GetKey(runKey) && !(Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D)) && staminaBar.currentStamina >= 1f)
         {
             RunAnim(true);
+            runSpeed = 10;
+            staminaBar.DrainStamina(drainAmount);
             movementSpeed = Mathf.Lerp(movementSpeed, runSpeed, Time.deltaTime * runBuildUpSpeed);
         }
 

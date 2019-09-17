@@ -23,9 +23,9 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         playerMove.enabled = false;
-        enemyController.enabled = false;
+        enemyController.enabled = false; 
         Invoke("DeadScene", restartDelay);
-        Invoke("Restart", restartDelay + 1f);
+        //Invoke("Restart", restartDelay + 1f);
     }
 
     void DeadScene()
