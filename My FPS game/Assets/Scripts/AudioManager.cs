@@ -28,6 +28,11 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        Play("HorrorAmbience");
+    }
+
     public void Play(string name)
     {
         foreach (Sound sound in sounds)

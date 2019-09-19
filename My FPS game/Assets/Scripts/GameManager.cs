@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
         enemyController = FindObjectOfType<EnemyController>();
         playerMove = FindObjectOfType<PlayerMove>();
         playerView = FindObjectOfType<PlayerView>();
-        EnemyDrop();
+        //EnemyDrop();
     }
 
     public void EndGame()

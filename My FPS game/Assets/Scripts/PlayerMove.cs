@@ -28,6 +28,8 @@ public class PlayerMove : MonoBehaviour
 
     private Animator animator;
 
+    public AudioManager audio;
+
     private void Start()
     {
         charController = GetComponent<CharacterController>();
@@ -172,6 +174,11 @@ public class PlayerMove : MonoBehaviour
     public bool IsJump()
     {
         return isJumping;
+    }
+
+    void StepSound()
+    {
+        audio.Play("FootStep");
     }
 
 }
