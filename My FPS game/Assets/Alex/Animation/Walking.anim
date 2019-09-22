@@ -38772,14 +38772,14 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.26666668
-    functionName: StepSound
+    functionName: LeftStepSound
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.76666665
-    functionName: StepSound
+    functionName: RightStepSound
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -31,15 +31,10 @@ public class EnemyController : MonoBehaviour
         agent.SetDestination(target.transform.position);
         if (distance <= agent.stoppingDistance)
         {
-            //FindObjectOfType<AudioManager>().Play("Dead");
             anim.SetBool("isAttacking", true);
+            gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
             gameManager.EndGame();
         }
-        else
-        {
-            anim.SetBool("isAttacking", false);
-        }
-
     }
 
     void FaceTarget()

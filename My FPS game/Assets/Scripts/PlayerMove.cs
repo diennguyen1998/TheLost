@@ -176,9 +176,13 @@ public class PlayerMove : MonoBehaviour
         return isJumping;
     }
 
-    void StepSound()
+    void LeftStepSound()
     {
-        audio.Play("FootStep");
+        audio.Play("FootStepLeft");
     }
 
+    void RightStepSound()
+    {
+        audio.Play("FootStepRight");
+    }
 }
