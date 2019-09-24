@@ -106,11 +106,17 @@ public class PlayerMove : MonoBehaviour
 
     private void SetMovementSpeed()
     {
-        if (Input.GetKey(runKey) && !(Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D)) && staminaBar.currentStamina >= 1f)
+        if (Input.GetKey(runKey) && Input.GetKey(KeyCode.W) && staminaBar.currentStamina >= 1f)
         {
             RunAnim(true);
             runSpeed = 10;
             staminaBar.DrainStamina(drainAmount);
+            movementSpeed = Mathf.Lerp(movementSpeed, runSpeed, Time.deltaTime * runBuildUpSpeed);
+        }
+
+        else if (Input.GetKey(KeyCode.S))
+        {
+            runSpeed = 2;
             movementSpeed = Mathf.Lerp(movementSpeed, runSpeed, Time.deltaTime * runBuildUpSpeed);
         }
 

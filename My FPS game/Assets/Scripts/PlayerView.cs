@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerView : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private Transform playerBody;
 
     private float xAxisClamp;
+    public GameObject interact;
+    public GameObject flashlight;
 
     private void Awake()
     {
@@ -26,8 +29,34 @@ public class PlayerView : MonoBehaviour
     private void Update()
     {
         CameraRotation();
-        CheckForShooting();
+        InteractGuide();
     }
+
+
+    void InteractGuide()
+    {
+        RaycastHit whatIHit;
+        if (Physics.Raycast(transform.position, transform.forward, out whatIHit, Mathf.Infinity))
+        {
+            if (whatIHit.collider.tag == "Door" && Vector3.Distance(transform.position, whatIHit.collider.transform.position) < 2f)
+            {
+                interact.SetActive(true);
+            }
+            else if(whatIHit.collider.tag == "Flashlight" && Vector3.Distance(transform.position, whatIHit.collider.transform.position) < 3f)
+            {
+                if (Input.GetKey(KeyCode.E))
+                {
+                    flashlight.SetActive(true);
+                    Destroy(GameObject.FindWithTag("Flashlight"));
+                }
+            }
+            else
+            {
+                interact.SetActive(false);
+            }
+        }
+    }
+
 
     private void CameraRotation()
     {
@@ -60,16 +89,15 @@ public class PlayerView : MonoBehaviour
         transform.eulerAngles = eulerRotation;
     }
 
-    private void CheckForShooting()
+    /*private void CheckForShooting()
     {
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit whatIHit;
             if(Physics.Raycast(transform.position, transform.forward, out whatIHit, Mathf.Infinity))
             {
-                /*string name = whatIHit.collider.name;
-                GameObject.Find(name).transform.position = transform.position;*/
+                Debug.Log(whatIHit.collider.name);
             }
         }
-    }
+    }*/
 }
