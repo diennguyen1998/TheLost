@@ -13,6 +13,7 @@ public class PlayerView : MonoBehaviour
     private float xAxisClamp;
     public GameObject interact;
     public GameObject flashlight;
+    public GameObject door;
 
     private void Awake()
     {
@@ -38,16 +39,17 @@ public class PlayerView : MonoBehaviour
         RaycastHit whatIHit;
         if (Physics.Raycast(transform.position, transform.forward, out whatIHit, Mathf.Infinity))
         {
-            if (whatIHit.collider.tag == "Door" && Vector3.Distance(transform.position, whatIHit.collider.transform.position) < 2f)
+            if (whatIHit.collider.tag != "Untagged" && whatIHit.collider.tag != "Player" && Vector3.Distance(transform.position, whatIHit.collider.transform.position) < 3f)
             {
                 interact.SetActive(true);
-            }
-            else if(whatIHit.collider.tag == "Flashlight" && Vector3.Distance(transform.position, whatIHit.collider.transform.position) < 3f)
-            {
-                if (Input.GetKey(KeyCode.E))
+                if (whatIHit.collider.tag == "Flashlight" && Input.GetKey(KeyCode.E))
                 {
                     flashlight.SetActive(true);
                     Destroy(GameObject.FindWithTag("Flashlight"));
+                }
+                else
+                {
+                    door.GetComponent<Animator>().SetBool("open", true);
                 }
             }
             else

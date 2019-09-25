@@ -11,25 +11,28 @@ public class GameManager : MonoBehaviour
     private EnemyController enemyController;
     private PlayerMove playerMove;
     private PlayerView playerView;
+    private GameObject player;
 
     void Start()
     {
         enemyController = FindObjectOfType<EnemyController>();
         playerMove = FindObjectOfType<PlayerMove>();
         playerView = FindObjectOfType<PlayerView>();
+        player = GameObject.FindWithTag("Player");
         //EnemyDrop();
     }
 
     public void EndGame()
     {
         playerMove.enabled = false;
-        enemyController.enabled = false; 
-        Invoke("DeadScene", restartDelay);
-        //Invoke("Restart", restartDelay + 1f);
+        enemyController.enabled = false;
+        StartCoroutine(DeadScene());
     }
 
-    void DeadScene()
+    IEnumerator DeadScene()
     {
+        player.SetActive(false);
+        yield return new WaitForSeconds(2f);
         deadUI.SetActive(true);
     }
 
