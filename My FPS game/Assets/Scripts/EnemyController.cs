@@ -13,50 +13,68 @@ public class EnemyController : MonoBehaviour
     public AudioManager audio;
     private Vector3 wanderPoint;
     private float timer = 0;
+    public HeadLookController headControl;
+    public GameObject targetToLook;
+    private bool found = false;
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         wanderPoint = RandomWanderPoint();
+        headControl.target = targetToLook.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Invoke("Chase", chasingDelay); 
+        if (found)
+        {
+            //headControl.target = targetToLook.transform.position;
+            Attack();
+        }
+        else
+        {
+            Invoke("Chase", chasingDelay);
+        }
     }
 
     void Chase()
     {
         float distance = Vector3.Distance(target.transform.position, transform.position);
-        if (Vector3.Angle(Vector3.forward, transform.InverseTransformPoint(target.transform.position)) < 45f && distance < 8f)
+        if (Vector3.Angle(Vector3.forward, transform.InverseTransformPoint(target.transform.position)) < 60f && distance < 6f)
         {
             FaceTarget();
+            //headControl.target = target.transform.position;
             agent.SetDestination(target.transform.position);
             if (distance <= agent.stoppingDistance)
             {
-                
                 if (SeekForTarget())
                 {
-                    anim.SetBool("isAttacking", true);
-                    gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
-                    gameManager.EndGame();
-                }      
+                    found = true;
+                }
             }
             
         }
         else
         {
+            //headControl.target = targetToLook.transform.position;
             Wander();
         }
+    }
+
+    void Attack()
+    {
+        anim.SetBool("isAttacking", true);
+        gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
+        gameManager.EndGame();
     }
 
     bool SeekForTarget()
     {
         RaycastHit hit;
         Vector3 me = new Vector3(transform.position.x, 1, transform.position.z);
-        if (Physics.Raycast(me, transform.forward, out hit))
+        if (Physics.Raycast(me, transform.forward, out hit, Mathf.Infinity))
         {
             if (hit.collider.tag == "Player")
             {

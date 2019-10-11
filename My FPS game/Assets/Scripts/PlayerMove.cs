@@ -64,7 +64,10 @@ public class PlayerMove : MonoBehaviour
         charController.SimpleMove(Vector3.ClampMagnitude(forwardMovement + rightMovement, 1.0f) * movementSpeed);
 
         if ((vertInput != 0 || horizInput != 0) && OnSlope())
+        {
             charController.Move(Vector3.down * charController.height / 2 * slopeForce * Time.deltaTime);
+        }
+            
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || isJumping == true)
         {

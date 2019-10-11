@@ -37,9 +37,9 @@ public class PlayerView : MonoBehaviour
     void InteractGuide()
     {
         RaycastHit whatIHit;
-        if (Physics.Raycast(transform.position, transform.forward, out whatIHit, Mathf.Infinity))
+        if (Physics.Raycast(transform.position, transform.forward, out whatIHit, Mathf.Infinity,9))
         {
-            if (whatIHit.collider.tag != "Untagged" && whatIHit.collider.tag != "Player" && Vector3.Distance(transform.position, whatIHit.collider.transform.position) < 3f)
+            if (whatIHit.collider.tag != "Untagged" && whatIHit.collider.tag != "Player" && Vector3.Distance(transform.position, whatIHit.collider.transform.position) <= 3f)
             {
                 interact.SetActive(true);
                 if (whatIHit.collider.tag == "Flashlight" && Input.GetKey(KeyCode.E))
@@ -47,7 +47,7 @@ public class PlayerView : MonoBehaviour
                     flashlight.SetActive(true);
                     Destroy(GameObject.FindWithTag("Flashlight"));
                 }
-                else
+                if(whatIHit.collider.tag == "Door" && Input.GetKey(KeyCode.E))
                 {
                     door.GetComponent<Animator>().SetBool("open", true);
                 }
