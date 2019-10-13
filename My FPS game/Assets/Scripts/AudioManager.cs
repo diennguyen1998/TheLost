@@ -17,7 +17,7 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
         foreach(Sound sound in sounds)
         {
             sound.source = gameObject.AddComponent<AudioSource>();
@@ -39,6 +39,10 @@ public class AudioManager : MonoBehaviour
         {
             if(sound.name == name)
             {
+                if (PauseMenu.gameIsPause)
+                {
+                    sound.pitch *= 0.5f;
+                }
                 sound.source.Play();
             }
         }

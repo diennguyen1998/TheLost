@@ -65,6 +65,7 @@ public class PlayerMove : MonoBehaviour
 
         if ((vertInput != 0 || horizInput != 0) && OnSlope())
         {
+            movementSpeed = 2;
             charController.Move(Vector3.down * charController.height / 2 * slopeForce * Time.deltaTime);
         }
             

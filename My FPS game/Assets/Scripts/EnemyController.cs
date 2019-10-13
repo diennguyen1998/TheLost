@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (found)
         {
@@ -59,6 +59,7 @@ public class EnemyController : MonoBehaviour
         else
         {
             //headControl.target = targetToLook.transform.position;
+            anim.SetBool("isWalking", false);
             Wander();
         }
     }
@@ -107,11 +108,15 @@ public class EnemyController : MonoBehaviour
     void Wander()
     {
         timer += Time.deltaTime;
-        if(timer >= 2f)
+        if (timer >= 3f)
         {
+            anim.SetBool("isWalking", true);
             wanderPoint = RandomWanderPoint();
-            agent.SetDestination(wanderPoint);
-            timer = 0;
+            if(Vector3.Distance(transform.position, wanderPoint) > 5f)
+            {
+                agent.SetDestination(wanderPoint);
+                timer = 0;
+            }
         }
     }
 

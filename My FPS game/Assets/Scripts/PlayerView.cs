@@ -21,7 +21,6 @@ public class PlayerView : MonoBehaviour
         xAxisClamp = 0.0f;
     }
 
-
     private void LockCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -29,6 +28,14 @@ public class PlayerView : MonoBehaviour
 
     private void Update()
     {
+        if (PauseMenu.gameIsPause)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            LockCursor();
+        }
         CameraRotation();
         InteractGuide();
     }

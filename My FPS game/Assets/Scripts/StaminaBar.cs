@@ -15,10 +15,18 @@ public class StaminaBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!PauseMenu.gameIsPause)
+        {
+            HealStamina();
+        }
+    }
+
+    private void HealStamina()
+    {
         currentStamina += 0.05f;
         sliderStamina.value = currentStamina;
 
-        if(currentStamina >= 100)
+        if (currentStamina >= 100)
         {
             currentStamina = 100;
         }
