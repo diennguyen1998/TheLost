@@ -57,8 +57,6 @@
   <ItemGroup>
      <Compile Include="Assets\_Flashlight PRO\_Assets\scripts\Flashlight_PRO.cs" />
      <Compile Include="Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\About\Scripts\Readme.cs" />
-     <Compile Include="Assets\Head Look Controller\Scripts\CursorHit.cs" />
-     <Compile Include="Assets\Head Look Controller\Scripts\HeadLookController.cs" />
      <Compile Include="Assets\Scripts\AudioManager.cs" />
      <Compile Include="Assets\Scripts\Crosshair.cs" />
      <Compile Include="Assets\Scripts\DoorManager.cs" />
@@ -73,7 +71,9 @@
      <Compile Include="Assets\Scripts\Sound.cs" />
      <Compile Include="Assets\Scripts\StaminaBar.cs" />
      <None Include="Assets\NavMeshComponents-master\ProjectSettings\ProjectVersion.txt" />
+     <None Include="Assets\Laptop\StandardColorMask.shader" />
      <None Include="Assets\Blood decal pack\readme.txt" />
+     <None Include="Assets\AdventureForge\CabinetsAndShelvesReadme.txt" />
      <None Include="Assets\Tim&apos;s Assets\Doors\Shader\BloodyDoor.shader" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>E:/UnityProject/My FPS game/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

@@ -13,24 +13,20 @@ public class EnemyController : MonoBehaviour
     public AudioManager audio;
     private Vector3 wanderPoint;
     private float timer = 0;
-    public HeadLookController headControl;
-    public GameObject targetToLook;
     private bool found = false;
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        wanderPoint = RandomWanderPoint();
-        headControl.target = targetToLook.transform.position;
+        wanderPoint = Vector3.zero;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (found)
-        {
-            //headControl.target = targetToLook.transform.position;
+        { 
             Attack();
         }
         else
@@ -41,25 +37,19 @@ public class EnemyController : MonoBehaviour
 
     void Chase()
     {
+        
         float distance = Vector3.Distance(target.transform.position, transform.position);
-        if (Vector3.Angle(Vector3.forward, transform.InverseTransformPoint(target.transform.position)) < 60f && distance < 6f)
+        if (Vector3.Angle(Vector3.forward, transform.InverseTransformPoint(target.transform.position)) <= 60f && distance <= 10f)
         {
             FaceTarget();
-            //headControl.target = target.transform.position;
             agent.SetDestination(target.transform.position);
             if (distance <= agent.stoppingDistance)
             {
-                if (SeekForTarget())
-                {
-                    found = true;
-                }
+                SeekForTarget();
             }
-            
         }
         else
         {
-            //headControl.target = targetToLook.transform.position;
-            anim.SetBool("isWalking", false);
             Wander();
         }
     }
@@ -71,7 +61,7 @@ public class EnemyController : MonoBehaviour
         gameManager.EndGame();
     }
 
-    bool SeekForTarget()
+    void SeekForTarget()
     {
         RaycastHit hit;
         Vector3 me = new Vector3(transform.position.x, 1, transform.position.z);
@@ -79,10 +69,14 @@ public class EnemyController : MonoBehaviour
         {
             if (hit.collider.tag == "Player")
             {
-                return true;
+                found = true;
+            }
+            else
+            {
+                found = false;
+                Wander();
             }
         }
-        return false;
     }
 
     void FaceTarget()
@@ -101,21 +95,25 @@ public class EnemyController : MonoBehaviour
     {
         Vector3 randomPoint = (Random.insideUnitSphere * 10f) + transform.position;
         NavMeshHit navHit;
-        NavMesh.SamplePosition(randomPoint, out navHit, 10f, -1);
-        return new Vector3(navHit.position.x, transform.position.y, navHit.position.z);
+        NavMesh.SamplePosition(randomPoint, out navHit, 10f, 1);
+        return navHit.position;
     }
 
     void Wander()
     {
         timer += Time.deltaTime;
-        if (timer >= 3f)
+        if(Vector3.Distance(transform.position, wanderPoint) < 2f)
         {
-            anim.SetBool("isWalking", true);
+            anim.SetBool("isWalking", false);
+        }
+        if (timer >= 2f)
+        {
             wanderPoint = RandomWanderPoint();
-            if(Vector3.Distance(transform.position, wanderPoint) > 5f)
+            timer = 0;
+            if (Vector3.Distance(transform.position, wanderPoint) > 5f)
             {
+                anim.SetBool("isWalking", true);
                 agent.SetDestination(wanderPoint);
-                timer = 0;
             }
         }
     }
