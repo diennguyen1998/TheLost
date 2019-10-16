@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class PlayerView : MonoBehaviour
@@ -57,6 +58,7 @@ public class PlayerView : MonoBehaviour
                 if(whatIHit.collider.tag == "Door" && Input.GetKey(KeyCode.E))
                 {
                     door.GetComponent<Animator>().SetBool("open", true);
+                    
                 }
             }
             else

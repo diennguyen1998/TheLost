@@ -20,6 +20,7 @@ public class EnemyController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         wanderPoint = Vector3.zero;
+        
     }
 
     // Update is called once per frame
