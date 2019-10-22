@@ -29,7 +29,7 @@ public class PlayerView : MonoBehaviour
 
     private void Update()
     {
-        if (PauseMenu.gameIsPause)
+        if (PauseMenu.gameIsPause || InventoryUI.gameIsPause)
         {
             Cursor.lockState = CursorLockMode.None;
         }
@@ -50,15 +50,14 @@ public class PlayerView : MonoBehaviour
             if (whatIHit.collider.tag != "Untagged" && whatIHit.collider.tag != "Player" && Vector3.Distance(transform.position, whatIHit.collider.transform.position) <= 3f)
             {
                 interact.SetActive(true);
-                if (whatIHit.collider.tag == "Flashlight" && Input.GetKey(KeyCode.E))
+                if (whatIHit.collider.tag == "Flashlight" && Input.GetKey(KeyCode.Mouse0))
                 {
                     flashlight.SetActive(true);
                     Destroy(GameObject.FindWithTag("Flashlight"));
                 }
-                if(whatIHit.collider.tag == "Door" && Input.GetKey(KeyCode.E))
+                if(whatIHit.collider.tag == "Door" && Input.GetKey(KeyCode.Mouse0))
                 {
                     door.GetComponent<Animator>().SetBool("open", true);
-                    
                 }
             }
             else

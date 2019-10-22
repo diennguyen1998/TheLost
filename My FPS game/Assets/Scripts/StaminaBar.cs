@@ -15,7 +15,7 @@ public class StaminaBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!PauseMenu.gameIsPause)
+        if (!PauseMenu.gameIsPause || !InventoryUI.gameIsPause)
         {
             HealStamina();
         }

@@ -19,8 +19,7 @@ public class EnemyController : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        wanderPoint = Vector3.zero;
-        
+        wanderPoint = RandomWanderPoint();
     }
 
     // Update is called once per frame
@@ -40,7 +39,7 @@ public class EnemyController : MonoBehaviour
     {
         
         float distance = Vector3.Distance(target.transform.position, transform.position);
-        if (Vector3.Angle(Vector3.forward, transform.InverseTransformPoint(target.transform.position)) <= 60f && distance <= 10f)
+        if (Vector3.Angle(Vector3.forward, transform.InverseTransformPoint(target.transform.position)) <= 60f && distance <= 7f)
         {
             FaceTarget();
             agent.SetDestination(target.transform.position);
@@ -103,20 +102,27 @@ public class EnemyController : MonoBehaviour
     void Wander()
     {
         timer += Time.deltaTime;
-        if(Vector3.Distance(transform.position, wanderPoint) < 2f)
+        if (Vector3.Distance(transform.position, wanderPoint) < 2f || timer > 3f)
         {
             anim.SetBool("isWalking", false);
-        }
-        if (timer >= 2f)
-        {
-            wanderPoint = RandomWanderPoint();
-            timer = 0;
-            if (Vector3.Distance(transform.position, wanderPoint) > 5f)
+            if(timer > 3f)
             {
-                anim.SetBool("isWalking", true);
-                agent.SetDestination(wanderPoint);
+                wanderPoint = RandomWanderPoint();
+                timer = 0;
             }
         }
+        if (Vector3.Distance(transform.position, wanderPoint) > 5f)
+        {
+            anim.SetBool("isWalking", true);
+            agent.SetDestination(wanderPoint);
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        // Draw a yellow sphere at the transform's position
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(wanderPoint, 0.1f);
     }
 
 }

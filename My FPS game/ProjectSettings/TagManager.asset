@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Door
   - Flashlight
+  - Item
   layers:
   - Default
   - TransparentFX
